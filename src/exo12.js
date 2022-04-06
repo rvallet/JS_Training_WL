@@ -11,8 +11,8 @@ PubSub.prototype.on = function (event, callback) {
 
 PubSub.prototype.emit = function (event, data) {
   // TODO: appeler les callbacks enregistrés pour l'événement `event`
-  this.events.get(event).forEach((element) => {
-    element(data);
+  this.events.get(event).forEach((callback) => {
+    callback(data);
   });
   // this.events.get("*").forEach((element) => {
   //   element(data);
