@@ -17,9 +17,6 @@ export function Observable(action) {
       //TODO: notifier les observateurs de la complétion
       this.observers.forEach((observer) => {
         observer.onComplete();
-        observer.unsubscribe = () => {
-          this.observers = this.observers.filter((o) => o !== observer);
-        };
       });
     }
   });
@@ -28,6 +25,9 @@ export function Observable(action) {
 Observable.prototype.subscribe = function (observer) {
   //TODO: enregistrer l'observateur
   this.observers.push(observer);
+  observer.unsubscribe = () => {
+    this.observers = this.observers.filter((o) => o !== observer);
+  };
   return observer;
 };
 
